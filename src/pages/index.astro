@@ -2,15 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Experience from '../components/Experience.astro';
+import Gallery from '../components/Gallery.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout>
   <Header />
   <main>
     <Hero />
-    <section id="servicios" class="section-placeholder" aria-label="Servicios"></section>
-    <section id="experiencia" class="section-placeholder" aria-label="Experiencia"></section>
-    <section id="portafolio" class="section-placeholder" aria-label="Portafolio"></section>
-    <section id="contacto" class="section-placeholder" aria-label="Contacto"></section>
+    <Services />
+    <Experience />
+    <Gallery />
+    <Contact />
   </main>
+  <Footer />
 </BaseLayout>

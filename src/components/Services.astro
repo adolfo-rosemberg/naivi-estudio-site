@@ -1,0 +1,28 @@
+---
+import { siteContent } from '../content/site';
+
+const serviceDetails = [
+  'Color diseñado para acompañar tu tono de piel y tu estilo.',
+  'Dimensiones de luz para darle movimiento a tu cabello.',
+  'Cortes que enmarcan tu rostro y se sienten tuyos.',
+  'Suavidad, brillo y cuidado para una melena más manejable.',
+  'Tratamiento de alisado con atención personalizada.',
+] as const;
+---
+
+<section id="servicios" class="content-section section-shell services" aria-labelledby="services-title">
+  <div class="section-heading" data-reveal>
+    <p class="eyebrow">Servicios</p>
+    <h2 id="services-title">Servicios para tu próximo cambio</h2>
+    <p>Cuéntame qué tienes en mente y juntas encontramos la mejor ruta para tu cabello.</p>
+  </div>
+  <div class="services__grid">
+    {siteContent.services.map((service, index) => (
+      <article class="service-card" data-reveal>
+        <span class="service-card__number" aria-hidden="true">0{index + 1}</span>
+        <h3>{service}</h3>
+        <p>{serviceDetails[index]}</p>
+      </article>
+    ))}
+  </div>
+</section>

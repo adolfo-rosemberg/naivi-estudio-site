@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import { galleryItems } from '../content/site';
+---
+
+<section id="portafolio" class="content-section section-shell gallery" aria-labelledby="gallery-title">
+  <div class="section-heading section-heading--split" data-reveal>
+    <div>
+      <p class="eyebrow">Portafolio</p>
+      <h2 id="gallery-title">Una mirada a mis trabajos</h2>
+    </div>
+    <p>Ideas reales para inspirarte. Cada resultado se adapta a tu cabello y a tu rutina.</p>
+  </div>
+  <div class="gallery__grid" data-gallery-grid>
+    {galleryItems.map((item, index) => (
+      <button
+        class:list={['gallery-card', index === 0 && 'gallery-card--feature']}
+        type="button"
+        data-gallery-trigger
+        data-gallery-index={index}
+        aria-label={`Ampliar trabajo ${index + 1}`}
+      >
+        <Image src={item.image} alt={item.alt} width={720} height={720} loading={index < 3 ? 'eager' : 'lazy'} />
+        <span class="gallery-card__veil" aria-hidden="true"><span>Ver trabajo</span></span>
+      </button>
+    ))}
+  </div>
+</section>

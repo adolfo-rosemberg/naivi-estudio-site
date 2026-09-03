@@ -1,0 +1,30 @@
+---
+import { siteContent } from '../content/site';
+---
+
+<section id="contacto" class="contact content-section" aria-labelledby="contact-title">
+  <div class="section-shell contact__inner">
+    <div class="contact__copy" data-reveal>
+      <p class="eyebrow eyebrow--light">Cita previa</p>
+      <h2 id="contact-title">Hablemos de tu próximo cambio</h2>
+      <p>
+        Cuéntame qué servicio te interesa para revisar tu caso y compartirte una cotización por
+        WhatsApp.
+      </p>
+      <button class="button button--light" type="button" data-contact-open>Solicitar cotización</button>
+    </div>
+    <div class="contact__details" data-reveal>
+      <div>
+        <span class="contact__label">Dónde</span>
+        <p>{siteContent.location}</p>
+        <small>Atención en casa, con ubicación exacta compartida al confirmar.</small>
+      </div>
+      <div>
+        <span class="contact__label">Cuándo</span>
+        <p>{siteContent.schedule[0]}<br />{siteContent.schedule[1]}<br />{siteContent.schedule[2]}</p>
+        <small>{siteContent.schedule[3]} · Todo</small>
+        <span class="contact__appointment">Por cita previa</span>
+      </div>
+    </div>
+  </div>
+</section>
