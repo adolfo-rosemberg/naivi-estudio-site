@@ -95,7 +95,10 @@ a {
 }
 
 .site-nav a:not(.button) {
+  display: inline-flex;
+  align-items: center;
   position: relative;
+  min-height: 44px;
   padding: 0.45rem 0;
   color: var(--color-muted);
   text-decoration: none;
@@ -245,6 +248,9 @@ h1 {
 }
 
 .text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--color-plum);
   font-size: 0.9rem;
   font-weight: 700;
@@ -299,23 +305,45 @@ html[data-reveal-enabled] [data-reveal] {
   transition: opacity 350ms ease, transform 350ms ease;
 }
 
-html[data-reveal-enabled] .hero__content [data-hero-reveal] {
-  transform: translateY(1.1rem);
-  transition-delay: var(--hero-delay, 0ms);
-  transition-duration: 620ms;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-html[data-reveal-enabled] .hero__visual [data-hero-logo] {
-  transform: translateY(1rem) scale(0.94);
-  transition-delay: var(--hero-delay, 0ms);
-  transition-duration: 760ms;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 html[data-reveal-enabled] [data-reveal].is-visible {
   opacity: 1;
   transform: none;
+}
+
+[data-hero-reveal] {
+  opacity: 0;
+  animation: hero-copy-in 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+[data-hero-logo] {
+  opacity: 0;
+  animation: hero-logo-in 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-logo-in {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .hero__halo {
@@ -362,23 +390,11 @@ html[data-reveal-enabled] [data-reveal].is-visible {
 
 .services {
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 8% 18%, rgb(216 11 104 / 13%), transparent 28%),
-    radial-gradient(circle at 92% 82%, rgb(12 82 96 / 14%), transparent 30%),
-    linear-gradient(135deg, #fff8f1 0%, #f9e9ef 48%, #eef5f1 100%);
-  border: 1px solid rgb(61 8 45 / 10%);
-  border-radius: clamp(1.5rem, 4vw, 3rem);
+  background: transparent;
 }
 
 .services::before {
-  position: absolute;
-  inset: 1.25rem;
-  content: '';
-  border: 1px solid rgb(255 255 255 / 58%);
-  border-radius: clamp(1rem, 3vw, 2.25rem);
-  pointer-events: none;
+  display: none;
 }
 
 .services > * {
@@ -440,8 +456,8 @@ html[data-reveal-enabled] [data-reveal].is-visible {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 3.4rem;
+  height: 3.4rem;
   color: var(--service-accent, var(--color-plum));
   background: color-mix(in srgb, var(--service-accent, var(--color-plum)) 13%, transparent);
   border: 1px solid color-mix(in srgb, var(--service-accent, var(--color-plum)) 24%, transparent);
@@ -449,13 +465,17 @@ html[data-reveal-enabled] [data-reveal].is-visible {
 }
 
 .service-card__icon svg {
-  width: 1.55rem;
-  height: 1.55rem;
+  width: 1.7rem;
+  height: 1.7rem;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.6;
+  stroke-width: 1.75;
+}
+
+.service-card__icon[data-service-icon='botox'] .service-icon__drop {
+  fill: currentColor;
 }
 
 .service-card--fuchsia {
@@ -912,6 +932,9 @@ html[data-reveal-enabled] [data-reveal].is-visible {
 }
 
 .site-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: #ffc2d9;
   font-weight: 700;
   text-decoration: none;
@@ -1043,5 +1066,12 @@ html[data-reveal-enabled] [data-reveal].is-visible {
     transition-duration: 0s !important;
     animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
+  }
+
+  [data-hero-reveal],
+  [data-hero-logo] {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
   }
 }

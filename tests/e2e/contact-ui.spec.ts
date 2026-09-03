@@ -6,5 +6,9 @@ test('opens the protected contact and submits only to the local endpoint', async
   const form = page.locator('form[action="/api/contacto"]');
   await expect(form).toBeVisible();
   await expect(form.locator('.cf-turnstile[data-action="contacto_whatsapp"]')).toHaveCount(1);
+  await expect(page.locator('script[data-turnstile-script]')).toHaveAttribute(
+    'src',
+    'https://challenges.cloudflare.com/turnstile/v0/api.js',
+  );
   await expect(page.locator('a[href*="wa.me"], a[href*="whatsapp.com"]')).toHaveCount(0);
 });

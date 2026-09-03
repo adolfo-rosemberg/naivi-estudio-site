@@ -20,6 +20,13 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fff8f1" />
     <title>{title}</title>
+    <script
+      data-turnstile-script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+      is:inline
+    ></script>
   </head>
   <body>
     <slot />
