@@ -15,6 +15,9 @@
     "test:unit": "vitest run tests/unit",
     "test:worker": "vitest run --config vitest.worker.config.ts",
     "test:e2e": "npm run build && node scripts/run-e2e.mjs",
+    "db:local": "wrangler d1 migrations apply naivi-contact-rate-limit --local --config wrangler.local.jsonc",
+    "preview:worker": "wrangler dev --local --config wrangler.local.jsonc --port 8787",
+    "test:integration": "npm run build && npm run db:local && node scripts/run-integration.mjs",
     "astro": "astro"
   },
   "dependencies": {

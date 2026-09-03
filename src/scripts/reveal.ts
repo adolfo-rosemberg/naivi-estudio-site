@@ -21,5 +21,12 @@ export function initReveal(): void {
     },
     { threshold: 0.16, rootMargin: '0px 0px -6% 0px' },
   );
-  elements.forEach((element) => observer.observe(element));
+  elements.forEach((element) => {
+    const bounds = element.getBoundingClientRect();
+    if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+      element.classList.add('is-visible');
+    } else {
+      observer.observe(element);
+    }
+  });
 }
