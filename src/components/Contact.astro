@@ -1,5 +1,6 @@
 ---
 import { siteContent } from '../content/site';
+import { CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
 ---
 
 <section id="contacto" class="contact content-section" aria-labelledby="contact-title">
@@ -28,3 +29,27 @@ import { siteContent } from '../content/site';
     </div>
   </div>
 </section>
+
+<dialog class="contact-dialog" data-contact-dialog aria-labelledby="contact-dialog-title">
+  <div class="contact-dialog__inner">
+    <div class="contact-dialog__toolbar">
+      <div>
+        <p class="eyebrow">Cita previa</p>
+        <h2 id="contact-dialog-title">Cuéntame qué tienes en mente</h2>
+      </div>
+      <button class="contact-dialog__close" type="button" data-contact-close aria-label="Cerrar contacto">×</button>
+    </div>
+    <p class="contact-dialog__intro">
+      Verificaremos que eres una persona antes de abrir la conversación segura de WhatsApp.
+    </p>
+    <form action={CONTACT_PATH} method="post" data-contact-form>
+      <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ''} data-action={TURNSTILE_ACTION}></div>
+      <input type="hidden" name="cf-turnstile-response" data-turnstile-response value="" />
+      <button class="button button--primary" type="submit" data-contact-submit>Continuar a WhatsApp</button>
+      <p class="contact-dialog__status" data-contact-status aria-live="polite"></p>
+    </form>
+    <noscript>
+      <p class="contact-dialog__noscript">Activa JavaScript para completar la verificación de seguridad.</p>
+    </noscript>
+  </div>
+</dialog>

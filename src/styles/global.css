@@ -664,6 +664,94 @@ html[data-reveal-enabled] [data-reveal].is-visible {
   text-transform: uppercase;
 }
 
+.contact-dialog {
+  width: min(92vw, 38rem);
+  max-width: none;
+  padding: 0;
+  color: var(--color-text);
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: 1.25rem;
+  box-shadow: 0 2rem 5rem rgb(39 19 31 / 32%);
+}
+
+.contact-dialog::backdrop {
+  background: rgb(39 19 31 / 70%);
+  backdrop-filter: blur(4px);
+}
+
+.contact-dialog__inner {
+  padding: clamp(1.35rem, 5vw, 2.5rem);
+}
+
+.contact-dialog__toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.contact-dialog__toolbar .eyebrow {
+  margin-bottom: 0.65rem;
+}
+
+.contact-dialog h2 {
+  max-width: 13ch;
+  font-size: clamp(2rem, 7vw, 3rem);
+}
+
+.contact-dialog__close {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--color-plum);
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.contact-dialog__intro {
+  max-width: 33rem;
+  margin: 1.25rem 0 0;
+  color: var(--color-muted);
+}
+
+.contact-dialog form {
+  margin-top: 1.5rem;
+}
+
+.cf-turnstile {
+  min-height: 4.1rem;
+  padding: 0.5rem;
+  background: #f8eee9;
+  border: 1px dashed var(--color-line);
+  border-radius: 0.8rem;
+}
+
+.contact-dialog form .button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.contact-dialog__status {
+  min-height: 1.5rem;
+  margin: 0.75rem 0 0;
+  color: var(--color-teal);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.contact-dialog__noscript {
+  margin: 1rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
 .contact__label {
   color: #ffc2d9;
   font-size: 0.72rem;
