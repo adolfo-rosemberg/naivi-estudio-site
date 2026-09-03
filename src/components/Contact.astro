@@ -44,7 +44,6 @@ import { CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
     </p>
     <form action={CONTACT_PATH} method="post" data-contact-form>
       <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ''} data-action={TURNSTILE_ACTION}></div>
-      <input type="hidden" name="cf-turnstile-response" data-turnstile-response value="" />
       <button class="button button--primary" type="submit" data-contact-submit>Continuar a WhatsApp</button>
       <p class="contact-dialog__status" data-contact-status aria-live="polite"></p>
     </form>
