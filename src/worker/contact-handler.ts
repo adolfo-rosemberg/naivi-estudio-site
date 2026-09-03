@@ -1,4 +1,5 @@
-import { CONTACT_MESSAGE, CONTACT_PATH, RATE_LIMIT_POLICY, TURNSTILE_ACTION } from '../shared/contact';
+import { CONTACT_MESSAGE, CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
+import { createD1RateLimiter } from './rate-limit';
 import { hashClientIp } from './security';
 import { verifyTurnstile } from './turnstile';
 import type { Env, RateLimiter, TurnstileResult } from './types';
@@ -102,13 +103,12 @@ export function createContactHandler(dependencies: ContactHandlerDependencies) {
   };
 }
 
-export const handleContact = createContactHandler({
-  verifyTurnstile: ({ secret, response, remoteIp }) => verifyTurnstile({ secret, response, remoteIp }),
-  hashClientIp,
-  rateLimiter: {
-    reserve: async () => ({ allowed: false, retryAfterSeconds: RATE_LIMIT_POLICY.windowSeconds }),
-  },
-  now: () => Math.floor(Date.now() / 1000),
-});
+export const handleContact = (request: Request, env: Env) =>
+  createContactHandler({
+    verifyTurnstile: ({ secret, response, remoteIp }) => verifyTurnstile({ secret, response, remoteIp }),
+    hashClientIp,
+    rateLimiter: createD1RateLimiter(env.RATE_LIMIT_DB),
+    now: () => Math.floor(Date.now() / 1000),
+  })(request, env);
 
 export { CONTACT_PATH };
