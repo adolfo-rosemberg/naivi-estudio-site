@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/naivi-estudio-compacto.png';
+import { siteContent } from '../content/site';
+---
+
+<header class="site-header" data-header>
+  <div class="site-header__inner">
+    <a class="brand-mark" href="#inicio" aria-label={`Ir al inicio de ${siteContent.brand}`}>
+      <Image src={logo} alt="" width={64} height={64} loading="eager" />
+      <span>{siteContent.brand}</span>
+    </a>
+    <button
+      class="menu-button"
+      type="button"
+      data-menu-button
+      aria-controls="site-menu"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+    >
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-menu" class="site-nav" data-menu aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#contacto">Contacto</a>
+      <a class="button button--small" href="#contacto" data-contact-open>Solicitar cotización</a>
+    </nav>
+  </div>
+</header>

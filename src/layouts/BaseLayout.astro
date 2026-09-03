@@ -1,0 +1,27 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Naivi Estudio | Tintes y colorimetría en Coatzacoalcos',
+  description = 'Tintes, mechas, cortes de cabello, bótox capilar y keratina por cita previa en Coatzacoalcos, Veracruz.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fff8f1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/brand/naivi-estudio-principal.png';
+import { siteContent } from '../content/site';
+---
+
+<section id="inicio" class="hero section-shell" aria-labelledby="hero-title">
+  <div class="hero__content" data-reveal>
+    <p class="eyebrow">Tintes y colorimetría en Coatzacoalcos</p>
+    <h1 id="hero-title">{siteContent.heroTitle}</h1>
+    <p class="hero__intro">
+      Cambios de imagen pensados para realzar tu estilo, con atención personalizada y cita previa.
+    </p>
+    <div class="hero__actions">
+      <a class="button button--primary" href="#contacto" data-contact-open>Solicitar cotización</a>
+      <a class="text-link" href="#servicios">Conoce los servicios <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="hero__experience">{siteContent.experienceLabel}</p>
+  </div>
+  <div class="hero__visual" data-reveal>
+    <div class="hero__halo" aria-hidden="true"></div>
+    <Image
+      src={logo}
+      alt="Logotipo ilustrado de Naivi Estudio con una mujer de cabello largo, peine y tijeras"
+      width={720}
+      height={720}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</section>
