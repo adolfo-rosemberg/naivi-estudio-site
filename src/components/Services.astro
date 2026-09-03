@@ -8,9 +8,11 @@ const serviceDetails = [
   'Suavidad, brillo y cuidado para una melena más manejable.',
   'Tratamiento de alisado con atención personalizada.',
 ] as const;
+
+const serviceAccents = ['fuchsia', 'teal', 'copper', 'plum', 'rose'] as const;
 ---
 
-<section id="servicios" class="content-section section-shell services" aria-labelledby="services-title">
+<section id="servicios" class="content-section section-shell services services--colorful" aria-labelledby="services-title">
   <div class="section-heading" data-reveal>
     <p class="eyebrow">Servicios</p>
     <h2 id="services-title">Servicios para tu próximo cambio</h2>
@@ -18,8 +20,40 @@ const serviceDetails = [
   </div>
   <div class="services__grid">
     {siteContent.services.map((service, index) => (
-      <article class="service-card" data-reveal>
-        <span class="service-card__number" aria-hidden="true">0{index + 1}</span>
+      <article class:list={["service-card", `service-card--${serviceAccents[index]}`]} data-reveal>
+        <div class="service-card__top">
+          <span class="service-card__number" aria-hidden="true">0{index + 1}</span>
+          <span class="service-card__icon" data-service-icon aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              {index === 0 && <path d="M12 3.5c2.8 3.3 5 5.9 5 9.3a5 5 0 0 1-10 0c0-3.4 2.2-6 5-9.3Z" />}
+              {index === 1 && (
+                <>
+                  <path d="M7 4v16M12 4v16M17 4v16" />
+                  <path d="M5 7h4M10 12h4M15 17h4" />
+                </>
+              )}
+              {index === 2 && (
+                <>
+                  <circle cx="7" cy="7" r="3" />
+                  <circle cx="17" cy="17" r="3" />
+                  <path d="m9.2 9.2 9.6 9.6M14.8 9.2 5.2 18.8" />
+                </>
+              )}
+              {index === 3 && (
+                <>
+                  <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" />
+                  <circle cx="12" cy="12" r="3.3" />
+                </>
+              )}
+              {index === 4 && (
+                <>
+                  <path d="M5 6c3.5 0 5 2.2 5 6s1.5 6 5 6c1.6 0 2.9-.5 4-1.5" />
+                  <path d="M5 18c3.5 0 5-2.2 5-6s1.5-6 5-6c1.6 0 2.9.5 4 1.5" />
+                </>
+              )}
+            </svg>
+          </span>
+        </div>
         <h3>{service}</h3>
         <p>{serviceDetails[index]}</p>
       </article>

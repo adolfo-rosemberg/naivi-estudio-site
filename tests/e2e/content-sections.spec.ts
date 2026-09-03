@@ -7,6 +7,9 @@ test('shows the approved services, experience, gallery and contact copy', async 
   for (const service of ['Tintes', 'Mechas', 'Cortes de cabello', 'Bótox capilar', 'Keratina']) {
     await expect(page.getByText(service, { exact: true })).toBeVisible();
   }
+  await expect(page.locator('#servicios [data-service-icon]')).toHaveCount(5);
+  await expect(page.locator('#servicios [data-service-icon] svg')).toHaveCount(5);
+  await expect(page.locator('#servicios')).toHaveClass(/services--colorful/);
   await expect(page.getByRole('heading', { name: 'Experiencia que se nota en cada detalle' })).toBeVisible();
   await expect(page.getByText('+15 años de experiencia', { exact: true })).toHaveCount(2);
   await expect(page.getByText('Coatzacoalcos, Veracruz', { exact: true })).toBeVisible();
