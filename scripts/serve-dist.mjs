@@ -19,14 +19,7 @@ const contentTypes = {
   '.jpg': 'image/jpeg',
 };
 
-let idleTimer;
-const touchIdleTimer = () => {
-  clearTimeout(idleTimer);
-  idleTimer = setTimeout(() => shutdown(), 1500);
-};
-
 const server = createServer((request, response) => {
-  touchIdleTimer();
   const requestPath = decodeURIComponent(new URL(request.url ?? '/', `http://${host}`).pathname);
   const candidate = normalize(join(root, requestPath));
   if (candidate !== root && !candidate.startsWith(`${root}${sep}`)) {

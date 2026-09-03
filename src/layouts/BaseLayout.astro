@@ -23,5 +23,14 @@ const {
   </head>
   <body>
     <slot />
+    <script>
+      import { initGallery } from '../scripts/gallery';
+      import { initNavigation } from '../scripts/navigation';
+      import { initReveal } from '../scripts/reveal';
+
+      initNavigation();
+      initReveal();
+      initGallery();
+    </script>
   </body>
 </html>

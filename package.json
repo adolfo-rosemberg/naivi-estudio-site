@@ -14,7 +14,7 @@
     "test": "npm run test:unit && npm run test:worker && npm run test:e2e && npm run test:integration",
     "test:unit": "vitest run tests/unit",
     "test:worker": "vitest run --config vitest.worker.config.ts",
-    "test:e2e": "npm run build && playwright test",
+    "test:e2e": "npm run build && node scripts/run-e2e.mjs",
     "astro": "astro"
   },
   "dependencies": {

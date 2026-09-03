@@ -25,4 +25,18 @@ import { galleryItems } from '../content/site';
       </button>
     ))}
   </div>
+  <dialog class="gallery-dialog" data-gallery-dialog aria-labelledby="gallery-dialog-title">
+    <div class="gallery-dialog__inner">
+      <div class="gallery-dialog__toolbar">
+        <p id="gallery-dialog-title">Trabajo de Naivi Estudio</p>
+        <button class="gallery-dialog__close" type="button" data-gallery-close aria-label="Cerrar imagen">×</button>
+      </div>
+      <div class="gallery-dialog__stage">
+        <button class="gallery-dialog__arrow" type="button" data-gallery-prev aria-label="Trabajo anterior">‹</button>
+        <img data-gallery-dialog-image src="" alt="" width="900" height="900" />
+        <button class="gallery-dialog__arrow" type="button" data-gallery-next aria-label="Trabajo siguiente">›</button>
+      </div>
+      <p class="gallery-dialog__caption" data-gallery-caption></p>
+    </div>
+  </dialog>
 </section>
