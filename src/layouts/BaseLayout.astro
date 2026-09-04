@@ -10,6 +10,8 @@ const {
   title = 'Naivi Estudio | Tintes y colorimetría en Coatzacoalcos',
   description = 'Tintes, mechas, cortes de cabello, bótox capilar y keratina por cita previa en Coatzacoalcos, Veracruz.',
 } = Astro.props;
+
+const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
 ---
 
 <!doctype html>
@@ -20,13 +22,15 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fff8f1" />
     <title>{title}</title>
-    <script
-      data-turnstile-script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
-      defer
-      is:inline
-    ></script>
+    {!isPreviewOnly && (
+      <script
+        data-turnstile-script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+        defer
+        is:inline
+      ></script>
+    )}
   </head>
   <body>
     <slot />

@@ -1,6 +1,8 @@
 ---
 import { siteContent } from '../content/site';
 import { CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
+
+const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
 ---
 
 <section id="contacto" class="contact content-section" aria-labelledby="contact-title">
@@ -39,16 +41,25 @@ import { CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
       </div>
       <button class="contact-dialog__close" type="button" data-contact-close aria-label="Cerrar contacto">×</button>
     </div>
-    <p class="contact-dialog__intro">
-      Verificaremos que eres una persona antes de abrir la conversación segura de WhatsApp.
-    </p>
-    <form action={CONTACT_PATH} method="post" data-contact-form>
-      <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ''} data-action={TURNSTILE_ACTION}></div>
-      <button class="button button--primary" type="submit" data-contact-submit>Continuar a WhatsApp</button>
-      <p class="contact-dialog__status" data-contact-status aria-live="polite"></p>
-    </form>
-    <noscript>
-      <p class="contact-dialog__noscript">Activa JavaScript para completar la verificación de seguridad.</p>
-    </noscript>
+    {isPreviewOnly ? (
+      <div data-contact-preview>
+        <p class="contact-dialog__intro"><strong>Esta es una vista temporal del sitio.</strong></p>
+        <p>El contacto por WhatsApp estará disponible en la publicación final.</p>
+      </div>
+    ) : (
+      <>
+        <p class="contact-dialog__intro">
+          Verificaremos que eres una persona antes de abrir la conversación segura de WhatsApp.
+        </p>
+        <form action={CONTACT_PATH} method="post" data-contact-form>
+          <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ''} data-action={TURNSTILE_ACTION}></div>
+          <button class="button button--primary" type="submit" data-contact-submit>Continuar a WhatsApp</button>
+          <p class="contact-dialog__status" data-contact-status aria-live="polite"></p>
+        </form>
+        <noscript>
+          <p class="contact-dialog__noscript">Activa JavaScript para completar la verificación de seguridad.</p>
+        </noscript>
+      </>
+    )}
   </div>
 </dialog>

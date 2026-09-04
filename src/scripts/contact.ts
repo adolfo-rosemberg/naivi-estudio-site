@@ -5,15 +5,15 @@ export function initContact(): void {
   const submitButton = dialog?.querySelector<HTMLButtonElement>('[data-contact-submit]');
   const status = dialog?.querySelector<HTMLElement>('[data-contact-status]');
   const openers = Array.from(document.querySelectorAll<HTMLElement>('[data-contact-open]'));
-  if (!dialog || !form || !closeButton || !submitButton || !status || !openers.length) return;
+  if (!dialog || !closeButton || !openers.length) return;
 
   let returnFocus: HTMLElement | null = null;
   let submitting = false;
 
   const close = () => {
     if (dialog.open) dialog.close();
-    status.textContent = '';
-    submitButton.disabled = false;
+    if (status) status.textContent = '';
+    if (submitButton) submitButton.disabled = false;
     submitting = false;
     returnFocus?.focus();
   };
@@ -39,10 +39,12 @@ export function initContact(): void {
   dialog.addEventListener('click', (event) => {
     if (event.target === dialog) close();
   });
-  form.addEventListener('submit', () => {
-    if (submitting) return;
-    submitting = true;
-    submitButton.disabled = true;
-    status.textContent = 'Verificando acceso seguro…';
-  });
+  if (form && submitButton && status) {
+    form.addEventListener('submit', () => {
+      if (submitting) return;
+      submitting = true;
+      submitButton.disabled = true;
+      status.textContent = 'Verificando acceso seguro…';
+    });
+  }
 }
