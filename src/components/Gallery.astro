@@ -1,6 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import { galleryItems } from '../content/site';
+
+const thumbnailWidth = 720;
+const galleryEntries = galleryItems.map((item) => ({
+  ...item,
+  thumbnailHeight: Math.round((thumbnailWidth * item.image.height) / item.image.width),
+}));
 ---
 
 <section id="portafolio" class="content-section section-shell gallery" aria-labelledby="gallery-title">
@@ -12,15 +18,24 @@ import { galleryItems } from '../content/site';
     <p>Ideas reales para inspirarte. Cada resultado se adapta a tu cabello y a tu rutina.</p>
   </div>
   <div class="gallery__grid" data-gallery-grid>
-    {galleryItems.map((item, index) => (
+    {galleryEntries.map((item, index) => (
       <button
         class:list={['gallery-card', index === 0 && 'gallery-card--feature']}
         type="button"
         data-gallery-trigger
         data-gallery-index={index}
+        data-gallery-full-src={item.image.src}
+        data-gallery-full-width={item.image.width}
+        data-gallery-full-height={item.image.height}
         aria-label={`Ampliar trabajo ${index + 1}`}
       >
-        <Image src={item.image} alt={item.alt} width={720} height={720} loading={index < 3 ? 'eager' : 'lazy'} />
+        <Image
+          src={item.image}
+          alt={item.alt}
+          width={thumbnailWidth}
+          height={item.thumbnailHeight}
+          loading={index < 3 ? 'eager' : 'lazy'}
+        />
         <span class="gallery-card__veil" aria-hidden="true"><span>Ver trabajo</span></span>
       </button>
     ))}
@@ -33,7 +48,15 @@ import { galleryItems } from '../content/site';
       </div>
       <div class="gallery-dialog__stage">
         <button class="gallery-dialog__arrow" type="button" data-gallery-prev aria-label="Trabajo anterior">‹</button>
-        <img data-gallery-dialog-image src="" alt="" width="900" height="900" />
+        <img
+          data-gallery-dialog-image
+          src={galleryEntries[0].image.src}
+          alt=""
+          width={galleryEntries[0].image.width}
+          height={galleryEntries[0].image.height}
+          loading="lazy"
+          decoding="async"
+        />
         <button class="gallery-dialog__arrow" type="button" data-gallery-next aria-label="Trabajo siguiente">›</button>
       </div>
       <p class="gallery-dialog__caption" data-gallery-caption></p>

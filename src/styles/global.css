@@ -748,6 +748,7 @@ html[data-reveal-enabled] [data-reveal].is-visible {
 .gallery-dialog__stage img {
   display: block;
   width: min(100%, 42rem);
+  height: auto;
   max-height: min(72vh, 42rem);
   object-fit: contain;
 }
@@ -1046,6 +1047,17 @@ html[data-reveal-enabled] [data-reveal].is-visible {
     grid-column: span 2;
     grid-row: span 1;
     aspect-ratio: 1.35;
+  }
+
+  .gallery-dialog__stage {
+    min-height: 0;
+    padding-inline: 0;
+  }
+
+  .gallery-dialog__stage img {
+    width: auto;
+    max-width: 100%;
+    max-height: min(68vh, 36rem);
   }
 
   .site-footer__inner {

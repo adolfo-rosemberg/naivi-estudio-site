@@ -3,6 +3,8 @@ import { siteContent } from '../content/site';
 import { CONTACT_PATH, TURNSTILE_ACTION } from '../shared/contact';
 
 const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
+const isContactReady = !isPreviewOnly && turnstileSiteKey.length > 0;
 ---
 
 <section id="contacto" class="contact content-section" aria-labelledby="contact-title">
@@ -37,7 +39,9 @@ const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
     <div class="contact-dialog__toolbar">
       <div>
         <p class="eyebrow">Cita previa</p>
-        <h2 id="contact-dialog-title">Cuéntame qué tienes en mente</h2>
+        <h2 id="contact-dialog-title">
+          {isPreviewOnly ? 'Contacto en la publicación final' : isContactReady ? 'Abrir WhatsApp' : 'Contacto no disponible'}
+        </h2>
       </div>
       <button class="contact-dialog__close" type="button" data-contact-close aria-label="Cerrar contacto">×</button>
     </div>
@@ -46,20 +50,21 @@ const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
         <p class="contact-dialog__intro"><strong>Esta es una vista temporal del sitio.</strong></p>
         <p>El contacto por WhatsApp estará disponible en la publicación final.</p>
       </div>
-    ) : (
+    ) : isContactReady ? (
       <>
-        <p class="contact-dialog__intro">
-          Verificaremos que eres una persona antes de abrir la conversación segura de WhatsApp.
-        </p>
         <form action={CONTACT_PATH} method="post" data-contact-form>
-          <div class="cf-turnstile" data-sitekey={import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? ''} data-action={TURNSTILE_ACTION}></div>
-          <button class="button button--primary" type="submit" data-contact-submit>Continuar a WhatsApp</button>
+          <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-action={TURNSTILE_ACTION}></div>
+          <button class="button button--primary" type="submit" data-contact-submit>Verificar y abrir WhatsApp</button>
           <p class="contact-dialog__status" data-contact-status aria-live="polite"></p>
         </form>
         <noscript>
           <p class="contact-dialog__noscript">Activa JavaScript para completar la verificación de seguridad.</p>
         </noscript>
       </>
+    ) : (
+      <p class="contact-dialog__intro" data-contact-unavailable>
+        El contacto por WhatsApp no está disponible por el momento.
+      </p>
     )}
   </div>
 </dialog>

@@ -13,9 +13,13 @@ export function initGallery(): void {
 
   const update = (index: number) => {
     currentIndex = (index + triggers.length) % triggers.length;
-    const source = triggers[currentIndex].querySelector<HTMLImageElement>('img');
-    if (!source) return;
-    image.src = source.currentSrc || source.src;
+    const trigger = triggers[currentIndex];
+    const source = trigger.querySelector<HTMLImageElement>('img');
+    const fullSource = trigger.dataset.galleryFullSrc;
+    if (!source || !fullSource) return;
+    image.src = fullSource;
+    image.width = Number(trigger.dataset.galleryFullWidth) || source.naturalWidth;
+    image.height = Number(trigger.dataset.galleryFullHeight) || source.naturalHeight;
     image.alt = source.alt;
     caption.textContent = source.alt;
     previousButton.disabled = triggers.length < 2;

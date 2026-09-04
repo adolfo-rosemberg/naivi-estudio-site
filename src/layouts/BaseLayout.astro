@@ -12,6 +12,7 @@ const {
 } = Astro.props;
 
 const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
+const hasTurnstileSiteKey = Boolean(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim());
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const isPreviewOnly = import.meta.env.PUBLIC_PREVIEW_ONLY === 'true';
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fff8f1" />
     <title>{title}</title>
-    {!isPreviewOnly && (
+    {!isPreviewOnly && hasTurnstileSiteKey && (
       <script
         data-turnstile-script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
